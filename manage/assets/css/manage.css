@@ -1,0 +1,236 @@
+html,body{
+    margin:0;
+    padding: 0;
+    font-family: monospace;
+}
+*{
+    font-family: monospace;
+}
+
+#PassModal{
+    background-color: black;
+    color: lightblue;
+    margin:0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0vh;
+    left:0vw;
+    text-align: center;
+
+}
+
+.wrpModal{
+    font-size: 5vw;
+}
+
+.wrpModal input {
+    font-size: 2vw;
+    border-radius: 10px;
+    padding: 8px;
+    background-color: lightblue;
+    text-align: center;
+}
+
+.wrpModal input:hover {
+    background-color: rgb(230, 222, 173);
+}
+
+
+.dataTable-LeadsWRP {
+  margin-block: 30px;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  background-color: #d3e5eb;
+}
+#ph .dataTable-LeadsWRP th {
+  /* box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset; */
+  font-size: 24px;
+  background-color: rgb(181 212 223);
+  text-align: center;
+}
+.dataTable-LeadsWRP td {
+    font-size: 18px;
+    text-align: center;
+
+}
+/* #ph #dataTable-Leads{
+    margin-top: 45px;
+} */
+#ph{
+    padding-inline: 15px;
+}
+
+#dataTable-Leads_filter {
+    margin-bottom: 25px;
+}
+
+#backLink{
+    margin-block: 20px;
+    text-align: right;
+    font-weight: 900;
+    font-size: 22px;
+    color: rgb(26, 45, 129);
+    cursor: pointer;
+    background-color: #cce8f1;
+    border-radius: 10px;
+    padding: 5px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+
+
+}
+#backLink:hover{
+    color: rgb(91, 118, 238);
+    background-color: #ecf1cc;
+
+}
+
+
+.icon{
+    width: 35px;
+}
+
+.iteminLine{
+  margin-right: 35px;
+  margin-block: 20px;
+  text-align: right;
+  font-weight: 900;
+  font-size: 22px;
+  color: rgb(26, 45, 129);
+  cursor: pointer;
+  background-color: #cce8f1;
+  border-radius: 10px;
+  padding: 5px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+
+
+}
+
+.iteminLine:hover{
+  color: rgb(91, 118, 238);
+  background-color: #ecf1cc;
+
+}
+
+.alignThis{
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+
+
+
+
+
+
+
+/* Reset CSS */
+body, h1, h2, h3, h4, h5, h6, p, ul, li {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Global styles */
+  body {
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Toolbar styles */
+  .toolbar {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo {
+    font-size: 24px;
+  }
+  
+  .menu ul {
+    list-style-type: none;
+  }
+  
+  .menu ul li {
+    display: inline-block;
+    margin-right: 20px;
+  }
+  
+  .menu ul li a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .menu ul li a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Header styles */
+  header {
+    background-color: #f2f2f2;
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+  
+  /* Main content styles */
+  main {
+    padding: 20px;
+
+  }
+  
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 30vw);
+    grid-template-rows: repeat(2, 20vw);
+    gap: 10px;
+    justify-content: center;
+    margin-block: 10px;
+    margin-bottom: 75px;
+  }
+  
+  .grid-item {
+    background-color: rgb(232, 232, 232);
+    text-align: center;
+    border: 1px black solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    cursor: pointer;
+    transition: transform 0.3s; /* Add smooth transition */
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+
+
+}
+.grid-item:hover{
+    transform: scale(1.125);
+    background-color: rgb(253, 255, 197);
+
+}
+
+
+.leadNum{
+    font-size: 38px;
+    margin-inline: 5px;
+    color: rgb(58, 148, 58);
+}
+
+.textTitle{
+    font-size: 24px;
+    margin-inline: 15px;
+}
+.textTitle:hover{
+    color: rgb(71, 111, 180);
+}
+.Title1{
+    font-size: 29px;
+    text-align: right;
+}
