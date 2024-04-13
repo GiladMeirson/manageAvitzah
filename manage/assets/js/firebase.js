@@ -2,6 +2,13 @@
 const FirstRef = "TopIncurense";
 const StaticRef = "Static";
 const LeadsRef = "Leads";
+const Views_RefString = 'Besure/Static/Views';
+const Leads_RefString = 'Besure/Leads';
+
+const refString ={};
+refString.Views_RefString=Views_RefString;
+refString.Leads_RefString= Leads_RefString;
+
 const PDSTRING = "Password";
 
 const Status ={

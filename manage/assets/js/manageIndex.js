@@ -1,71 +1,6 @@
 
 
-const stam =[
-    {
-        from:document.referrer,
-        device:'mobile',
-    },
-    {
-        from:document.referrer,
-        device:'mobile',
-    },
-    {
-        from:document.referrer,
-        device:'desktop',
-    },
-    {
-        from:document.referrer,
-        device:'mobile',
-    },
-    {
-        from:document.referrer,
-        device:'desktop',
-    },
-]
 
-const Leads = [
-    {
-        name:'שולה שולה',
-        birthdateNumber:new Date().getTime(),
-        phone:'054-2122453',
-        device:'mobile',
-        from:document.referrer,
-        id:'032442342',
-        callMeAt:new Date().getTime(),
-        status:Status.new,
-    },
-    {
-        name:'שולה שולה',
-        birthdateNumber:new Date().getTime(),
-        phone:'054-2122453',
-        device:'mobile',
-        from:document.referrer,
-        id:'032442342',
-        callMeAt:new Date().getTime(),
-        status:Status.new,
-    },
-    {
-        name:'שולה שולה',
-        birthdateNumber:new Date().getTime(),
-        phone:'054-2122453',
-        device:'mobile',
-        from:document.referrer,
-        id:'032442342',
-        callMeAt:new Date().getTime(),
-        status:Status.procsess,
-    },
-    {
-        name:'שולה שולה',
-        birthdateNumber:new Date().getTime(),
-        phone:'054-2122453',
-        device:'mobile',
-        from:document.referrer,
-        id:'032442342',
-        callMeAt:new Date().getTime(),
-        status:Status.sold,
-    },
-
-]
 
 Global_ArrayToExcel=[];
 Global_Leads=[];
@@ -80,10 +15,17 @@ const init = () => {
     // document.getElementById('passIN').addEventListener('keypress',SendPass)
     
     //if the pass is true.
-    RenderHeader(); 
-    RenderMainDashboard();
-    RenderBarCharMain();
-    RenderPieChartMain();
+    fetchDataFromFirebase(refString.Leads_RefString)
+    .then((data)=>{
+        
+        Global_Leads = Object.values(data);
+        console.log(Global_Leads);
+        RenderHeader(); 
+        RenderMainDashboard();
+        RenderBarCharMain();
+        RenderPieChartMain();
+    })
+
     
 }
 
@@ -251,8 +193,7 @@ document.body.innerHTML = str;
 }
 
 const RenderDataTable= async ()=>{
-    const data = await fetchDataFromFirebase(`${Refs.FirstRef}/${Refs.LeadsRef}`);
-    Global_Leads = data;
+    let data = Global_Leads;
     console.log(data)
     let str = `<div class="dataTable-LeadsWRP">
     <div><p class="Title1">טבלת לידים</p></div>
