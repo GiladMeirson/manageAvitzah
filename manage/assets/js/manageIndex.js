@@ -1,9 +1,12 @@
 
 
-
+const StringToConfig = {
+    indexUrl : `https://giladmeirson.github.io/Bsure/temp1/`,
+}
 
 Global_ArrayToExcel=[];
 Global_Leads=[];
+Global_Views=[];
 
 
 $(document).ready(()=>{
@@ -20,10 +23,15 @@ const init = () => {
         
         Global_Leads = Object.values(data);
         console.log(Global_Leads);
-        RenderHeader(); 
-        RenderMainDashboard();
-        RenderBarCharMain();
-        RenderPieChartMain();
+        fetchDataFromFirebase(refString.Views_RefString)
+        .then((data)=>{
+            Global_Views = Object.values(data);
+            RenderHeader(); 
+            RenderMainDashboard();
+            RenderBarCharMain();
+            RenderPieChartMain();
+        })
+
     })
 
     
@@ -83,9 +91,9 @@ const RenderPassModal=()=>{
 
 const RenderBarCharMain =()=>{
     //need to change to real data.
-    const xValues = ["אתר-1", "אתר-2", "אתר-3"];
-    const yValues = [40, 30, 25];
-    var barColors = ["#f38080", "#68ef82","#6594f1"];
+    const xValues = ["Be-sure", "עוד לא קיים", "עוד לא קיים"];
+    const yValues = [Global_Views.length, 0, 0];
+    var barColors = ["#6594f1", "#68ef82","#f38080"];
 
     new Chart("BarChart", {
   type: "bar",
@@ -114,11 +122,9 @@ const RenderBarCharMain =()=>{
 }
 
 const RenderPieChartMain=()=>{
-    var xValues = ["אתר-1", "אתר-2", "אתר-3"];
-    var yValues = [55, 49, 44];
-    var barColors = [
-        "#f38080", "#68ef82","#6594f1"
-    ];
+    const xValues = ["Be-sure", "עוד לא קיים", "עוד לא קיים"];
+    const yValues = [Global_Views.length+Global_Leads.length, 0, 0];
+    var barColors = ["#6594f1", "#68ef82","#f38080"];
     
     new Chart("PieChart", {
       type: "pie",
@@ -148,7 +154,7 @@ const RenderMainDashboard = ()=>{
             <canvas id="BarChart" style="min-height: 100%;"></canvas>
         </div>
         <div class="grid-item">
-            <p dir="rtl" class="textTitle"><span id="leadNum" class="leadNum">5</span> לידים חדשים מאז <br><br>הפעם האחרונה</p>
+            <p dir="rtl" class="textTitle"><span id="leadNum" class="leadNum">${Global_Leads.length}</span> לידים חדשים מאז <br><br>הפעם האחרונה</p>
         </div>
         <div class="grid-item">
         <img class="icon" src="../assets/img/table1.png" alt="">
@@ -222,22 +228,26 @@ const RenderDataTable= async ()=>{
       <tbody>`;
       for (let i = 0; i < data.length; i++) {
         const lead = data[i];
-        let birthDate = formatDateFromNumber(lead.birthdateNumber);
-        let age = calculateAgeFromNumber(lead.birthdateNumber);
-        str+=`<tr id="E_${lead.id}">`;
-        str+=`<td>${lead.id}</td>`;
+        let birthDate =lead.birthdateNumber=='לא ידוע'?lead.birthdateNumber:formatDateFromNumber(lead.birthdateNumber);
+        let age = birthDate=='לא ידוע'?birthDate: calculateAgeFromNumber(lead.birthdateNumber);
+        lead.G_id = lead.id==''?GenerateKey():lead.id;
+        str+=`<tr id="E_${lead.id==''?lead.G_id:lead.id}">`;
+        str+=`<td>${lead.id==''?'לא ידוע':lead.id}</td>`;
         str+=`<td>${lead.name}</td>`;
         str+=`<td>${lead.phone}</td>`;
         str+=`<td>${birthDate}</td>`;
         str+=`<td>${age}</td>`;
         str+=`<td>${lead.status}</td>`;
         str+=`<td>${lead.device}</td>`;
-        str+=`<td>${lead.from}</td>`;
+        str+=`<td>${normalizeFrom(lead.form)}</td>`;
         str+=`<td><button>CLICK</button></td>`;
-        str+=`<td><input onchange="MarkMe(this)" class="marksIN"  type="checkbox" name="markMe" id="MarkMe_${lead.id}"></td>`;
+        str+=`<td><input onchange="MarkMe(this)" class="marksIN"  type="checkbox" name="markMe" id="MarkMe_${lead.id==''?lead.G_id:lead.id}"></td>`;
         str+=`</tr>`;
         
+
       }
+
+    
         
       str+=` </tbody>
        <tfoot>
@@ -266,7 +276,10 @@ const RenderDataTable= async ()=>{
 //------****************Renders******************------\\
 
 
-
+const normalizeFrom = (str)=>{
+    let returnStr = (str.includes('index')||str==StringToConfig.indexUrl) ?'דף הבית':str.includes('insurenceCase')?'בדיקת תיק ביטוח':str.includes('loanVsPension')?'הלוואה כנגד קרן פנסיה':str.includes('Mortgage')?'משכנתא':str.includes('Cycle')?'מיחזור משכנתא':str.includes('PensionFund')?'פנסיה':'???';
+    return returnStr;
+}
 
 const changeAllMarks=(elm)=>{
     //console.log(elm.checked)
@@ -309,7 +322,7 @@ const exportLeadsToExcel = ()=>{
 
 function getObjectById(id, arrayOfObjects) {
     for (let obj of arrayOfObjects) {
-      if (obj.id == id) {
+      if (obj.G_id == id) {
         return obj;
       }
     }
@@ -429,3 +442,9 @@ const PUT = (id,ref,newValue)=>{
   
 }
 
+
+const GenerateKey = ()=>{
+    let ReturnNum = Math.round(Math.random()*99999 +999);
+    return ReturnNum ;
+    
+}
